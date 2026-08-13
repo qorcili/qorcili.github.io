@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ბაჩო & ნათია - 20 წელი ერთად!</title>
+    
+    <!-- Open Graph / WhatsApp Preview -->
+    <meta property="og:title" content="ბაჩო & ნათია - 20 წელი ერთად! ✨" />
+    <meta property="og:description" content="სიყვარულით გეპატიჟებით რაჭაში! გახსენით მოსაწვევი." />
+    <meta property="og:image" content="https://qorcili.github.io/pics/pic1.jpg" />
+    <meta property="og:url" content="https://qorcili.github.io" />
+
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Sans+Georgian:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -23,7 +30,7 @@
             color: #fff;
         }
 
-        /* 1. ძირითადი ფონი - pic1.jpg */
+        /* 1. ძირითადი ფონი - pic1.jpg (მუდმივად რჩება) */
         .main-background {
             position: fixed;
             top: 0;
@@ -46,7 +53,7 @@
             z-index: -1;
         }
 
-        /* მთავარი განლაგება - ფიქსირებული 3 სვეტი */
+        /* მთავარი განლაგება */
         .main-container {
             display: flex;
             align-items: center;
@@ -70,7 +77,7 @@
             position: relative;
             opacity: 0;
             transform: scale(0.8);
-            transition: all 0.8s ease 0.5s;
+            transition: all 0.8s ease 0.4s;
             pointer-events: none;
         }
 
@@ -100,7 +107,7 @@
             position: relative;
         }
 
-        /* კონვერტი */
+        /* ✉️ კონვერტი (ჩანს გახსნამდე) */
         .envelope-container {
             position: relative;
             width: 320px;
@@ -109,7 +116,7 @@
             border-radius: 12px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.8);
             cursor: pointer;
-            transition: transform 0.4s ease;
+            transition: opacity 0.5s ease, transform 0.5s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 5;
         }
@@ -138,7 +145,7 @@
             background-color: #1a1d24;
             clip-path: polygon(0 0, 100% 0, 50% 100%);
             transform-origin: top;
-            transition: transform 0.7s ease 0.2s, z-index 0.2s;
+            transition: transform 0.5s ease;
             z-index: 5;
             border-bottom: 1px solid rgba(212, 175, 55, 0.3);
         }
@@ -161,7 +168,6 @@
             font-weight: 700;
             box-shadow: 0 6px 15px rgba(0,0,0,0.5);
             z-index: 6;
-            transition: opacity 0.4s ease;
             border: 2px solid #8c6209;
         }
 
@@ -183,7 +189,7 @@
             border-radius: 16px;
             padding: 25px 20px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
             opacity: 0;
             max-height: 0;
@@ -191,24 +197,33 @@
             pointer-events: none;
             border: 1px solid rgba(212, 175, 55, 0.5);
             color: #333;
-            margin-top: 15px;
+            display: none; /* გახსნამდე საერთოდ არ იკავებს ადგილს */
         }
 
-        /* გახსნილი მდგომარეობა */
-        .center-content.open .flap {
-            transform: rotateX(180deg);
-            z-index: 0;
-        }
-
-        .center-content.open .monogram-seal {
+        /* გახსნის შემდეგ (Open State): კონვერტი ქრება, ბარათი ჩნდება */
+        .center-content.open .envelope-container {
             opacity: 0;
             pointer-events: none;
+            display: none; /* კონვერტი სრულად ქრება */
         }
 
         .center-content.open .card {
+            display: block;
             opacity: 1;
             max-height: 1000px;
             pointer-events: auto;
+            animation: fadeInCard 0.8s ease forwards;
+        }
+
+        @keyframes fadeInCard {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         .main-container.open .side-slideshow {
@@ -357,7 +372,7 @@
     <!-- მარცხენა სლაიდერი -->
     <div class="side-slideshow" id="slideshowLeft"></div>
 
-    <!-- ცენტრალური ზონა (კონვერტი + ბარათი) -->
+    <!-- ცენტრალური ზონა (კონვერტი / ბარათი) -->
     <div class="center-content" id="centerContent">
         <div class="envelope-container" onclick="openEnvelope()">
             <div class="envelope-internal"></div>
@@ -407,7 +422,7 @@
                 <a href="https://wa.me/?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90!%20%E1%83%A1%E1%83%98%E1%83%90%E1%83%9B%E1%83%90%E1%83%95%E1%83%9C%E1%83%94%E1%83%91%E1%83%98%E1%83%97%20%E1%83%93%E1%83%90%E1%83%95%E1%83%94%E1%83%A1%E1%83%AC%E1%83%A0%E1%83%94%E1%83%91%E1%83%98%20%E1%83%91%E1%83%90%E1%83%80%E1%83%9D%E1%83%A1%E1%83%90%20%E1%83%93%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98%E1%83%90%E1%83%A1%2020%20%E1%83%AC%E1%83%9A%E1%83%98%E1%83%A1%20%E1%83%98%E1%83%A3%E1%83%91%E1%83%98%E1%83%9A%E1%83%94%E1%83%A1%20%E1%83%A0%E1%83%90%E1%83%9A%E1%83%90%E1%83%A8%E1%83%98!%20%F0%9F%A5%82" class="btn btn-primary" target="_blank">
                     ✅ დავესწრები
                 </a>
-                <a href="https://maps.google.com/?q=Khideshlebi+Guesthouse+Racha" class="btn btn-secondary" target="_blank">
+                <a href="https://maps.app.goo.gl/wmk44zNbbzcWyksW6" class="btn btn-secondary" target="_blank">
                     📍 ლოკაციის ნახვა
                 </a>
             </div>
@@ -456,7 +471,7 @@
             indexLeft = (indexLeft + 1) % images.length;
             indexRight = (indexRight + 1) % images.length;
             updateSlides();
-        }, 5000);
+        }, 2500);
     }
 
     function updateSlides() {
