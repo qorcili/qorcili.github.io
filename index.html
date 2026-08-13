@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ბაჩო & ნათია - 20 წელი ერთად!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Sans+Georgian:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Noto Sans Georgian', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+            position: relative;
+            color: #fff;
+        }
+
+        /* 1. ძირითადი ფონი - pic1.jpg */
+        .main-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('pics/pic1.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: -1;
+        }
+
+        /* მთავარი განლაგება - ფიქსირებული 3 სვეტი */
+        .main-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* მარცხენა და მარჯვენა სლაიდერის ბლოკები */
+        .side-slideshow {
+            width: 240px;
+            height: 340px;
+            flex-shrink: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            border: 2px solid rgba(212, 175, 55, 0.5);
+            position: relative;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s ease 0.5s;
+            pointer-events: none;
+        }
+
+        .side-slideshow img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .side-slideshow img.active {
+            opacity: 1;
+        }
+
+        /* ცენტრალური ზონა */
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 340px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        /* კონვერტი */
+        .envelope-container {
+            position: relative;
+            width: 320px;
+            height: 210px;
+            background-color: #1a1d24;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            cursor: pointer;
+            transition: transform 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 5;
+        }
+
+        .envelope-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .envelope-internal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><g fill-rule="evenodd"><g fill="%23d4af37" fill-opacity="0.05"><path d="M50 40c13.255 0 24 10.745 24 24S63.255 88 50 88 26 77.255 26 64s10.745-24 24-24zm0 4c11.046 0 20 8.954 20 20s-8.954 20-20 20-20-8.954-20-20 8.954-20 20-20zm0 10c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10z"/></g></g></svg>');
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        .flap {
+            position: absolute;
+            top: -1px;
+            left: 0;
+            width: 100%;
+            height: 110px;
+            background-color: #1a1d24;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transform-origin: top;
+            transition: transform 0.7s ease 0.2s, z-index 0.2s;
+            z-index: 5;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .monogram-seal {
+            position: absolute;
+            top: 75px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 55px;
+            height: 55px;
+            background: radial-gradient(circle at 30% 30%, #f3e5ab, #d4af37, #aa7c11);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #1a1d24;
+            font-family: 'Cinzel', serif;
+            font-size: 22px;
+            font-weight: 700;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+            z-index: 6;
+            transition: opacity 0.4s ease;
+            border: 2px solid #8c6209;
+        }
+
+        .pocket {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 110px;
+            background-color: #16191e;
+            clip-path: polygon(0 100%, 100% 100%, 50% 0);
+            z-index: 4;
+        }
+
+        /* ბარათი - ტექსტი */
+        .card {
+            width: 340px;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 16px;
+            padding: 25px 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+            text-align: center;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            pointer-events: none;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            color: #333;
+            margin-top: 15px;
+        }
+
+        /* გახსნილი მდგომარეობა */
+        .center-content.open .flap {
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+
+        .center-content.open .monogram-seal {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .center-content.open .card {
+            opacity: 1;
+            max-height: 1000px;
+            pointer-events: auto;
+        }
+
+        .main-container.open .side-slideshow {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ტექსტის სტილები */
+        .card h3 {
+            color: #aa7c11;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .card h1 {
+            font-family: 'Cinzel', serif;
+            color: #1a1d24;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .names {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1d24;
+            margin-bottom: 15px;
+        }
+
+        .names a {
+            color: #1a1d24;
+            text-decoration: none;
+            border-bottom: 2px solid #d4af37;
+        }
+
+        .text-body {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #4a5568;
+            margin-bottom: 18px;
+        }
+
+        .details-box {
+            background: #f7fafc;
+            border-radius: 10px;
+            padding: 14px;
+            text-align: left;
+            margin-bottom: 18px;
+            font-size: 12px;
+            border: 1px solid #edf2f7;
+        }
+
+        .details-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #2d3748;
+        }
+
+        .details-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .details-item span {
+            font-size: 17px;
+            margin-right: 10px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: #25D366;
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: #1da851;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #1a1d24;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e1;
+            transform: translateY(-2px);
+        }
+
+        .hint {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13px;
+            margin-top: 15px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
+        /* მობილური მოწყობილობების ადაპტაცია */
+        @media (max-width: 880px) {
+            body {
+                overflow-y: auto;
+            }
+            .main-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .side-slideshow {
+                width: 320px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- მუდმივი ფონი (pic1.jpg) -->
+<div class="main-background"></div>
+<div class="bg-overlay"></div>
+
+<div class="main-container" id="mainContainer">
+    
+    <!-- მარცხენა სლაიდერი -->
+    <div class="side-slideshow" id="slideshowLeft"></div>
+
+    <!-- ცენტრალური ზონა (კონვერტი + ბარათი) -->
+    <div class="center-content" id="centerContent">
+        <div class="envelope-container" onclick="openEnvelope()">
+            <div class="envelope-internal"></div>
+            <div class="flap"></div>
+            <div class="monogram-seal">20</div>
+            <div class="pocket"></div>
+        </div>
+
+        <div class="hint" id="hint">გახსენით მოსაწვევი ✨</div>
+
+        <div class="card" id="card">
+            <h3>Save the Date</h3>
+            <h1>20 წელი ერთად</h1>
+            
+            <div class="names">
+                <a href="https://www.instagram.com/bachogurgenize/" target="_blank">ბაჩო</a> & 
+                <a href="https://www.instagram.com/natia.babukhadia/" target="_blank">ნათია</a>
+            </div>
+
+            <p class="text-body">
+                სიყვარულით გეპატიჟებით რაჭაში, ჩვენი 20 წლის იუბილის აღსანიშნავად! გვინდა ეს განსაკუთრებული დღე გავატაროთ საუკეთესო მეგობრების გარემოცვაში.
+            </p>
+
+            <div class="details-box">
+                <div class="details-item">
+                    <span>📅</span>
+                    <div>
+                        <strong>12 - 13 სექტემბერი</strong><br>
+                        <small style="color: #718096;">(შაბათი 12:00 - კვირა 12:00)</small>
+                    </div>
+                </div>
+                <div class="details-item">
+                    <span>📍</span>
+                    <div>
+                        <strong><a href="https://www.instagram.com/khideshlebiguesthouse" target="_blank" style="color: #aa7c11; text-decoration: none; font-weight: 600;">Khideshlebi Guesthouse</a></strong>, რაჭა
+                    </div>
+                </div>
+                <div class="details-item">
+                    <span>🍷</span>
+                    <div>
+                        <strong>რაჭული სიმყუდროვე & 1 ღამე</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <a href="https://wa.me/?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90!%20%E1%83%A1%E1%83%98%E1%83%90%E1%83%9B%E1%83%90%E1%83%95%E1%83%9C%E1%83%94%E1%83%91%E1%83%98%E1%83%97%20%E1%83%93%E1%83%90%E1%83%95%E1%83%94%E1%83%A1%E1%83%AC%E1%83%A0%E1%83%94%E1%83%91%E1%83%98%20%E1%83%91%E1%83%90%E1%83%80%E1%83%9D%E1%83%A1%E1%83%90%20%E1%83%93%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98%E1%83%90%E1%83%A1%2020%20%E1%83%AC%E1%83%9A%E1%83%98%E1%83%A1%20%E1%83%98%E1%83%A3%E1%83%91%E1%83%98%E1%83%9A%E1%83%94%E1%83%A1%20%E1%83%A0%E1%83%90%E1%83%9A%E1%83%90%E1%83%A8%E1%83%98!%20%F0%9F%A5%82" class="btn btn-primary" target="_blank">
+                    ✅ დავესწრები
+                </a>
+                <a href="https://maps.google.com/?q=Khideshlebi+Guesthouse+Racha" class="btn btn-secondary" target="_blank">
+                    📍 ლოკაციის ნახვა
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- მარჯვენა სლაიდერი -->
+    <div class="side-slideshow" id="slideshowRight"></div>
+
+</div>
+
+<script>
+    const images = [];
+    for (let i = 2; i <= 13; i++) {
+        images.push(`pics/pic${i}.jpg`);
+    }
+
+    let indexLeft = 0;
+    let indexRight = Math.floor(images.length / 2);
+
+    function openEnvelope() {
+        document.getElementById('centerContent').classList.add('open');
+        document.getElementById('mainContainer').classList.add('open');
+        document.getElementById('hint').style.display = 'none';
+
+        initSlideshows();
+    }
+
+    function initSlideshows() {
+        const leftContainer = document.getElementById('slideshowLeft');
+        const rightContainer = document.getElementById('slideshowRight');
+
+        images.forEach((src) => {
+            const imgL = document.createElement('img');
+            imgL.src = src;
+            leftContainer.appendChild(imgL);
+
+            const imgR = document.createElement('img');
+            imgR.src = src;
+            rightContainer.appendChild(imgR);
+        });
+
+        updateSlides();
+
+        setInterval(() => {
+            indexLeft = (indexLeft + 1) % images.length;
+            indexRight = (indexRight + 1) % images.length;
+            updateSlides();
+        }, 5000);
+    }
+
+    function updateSlides() {
+        const leftImgs = document.querySelectorAll('#slideshowLeft img');
+        const rightImgs = document.querySelectorAll('#slideshowRight img');
+
+        leftImgs.forEach((img, idx) => {
+            img.classList.toggle('active', idx === indexLeft);
+        });
+
+        rightImgs.forEach((img, idx) => {
+            img.classList.toggle('active', idx === indexRight);
+        });
+    }
+</script>
+
+</body>
+</html>
