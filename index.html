@@ -197,14 +197,14 @@
             pointer-events: none;
             border: 1px solid rgba(212, 175, 55, 0.5);
             color: #333;
-            display: none; /* გახსნამდე საერთოდ არ იკავებს ადგილს */
+            display: none;
         }
 
         /* გახსნის შემდეგ (Open State): კონვერტი ქრება, ბარათი ჩნდება */
         .center-content.open .envelope-container {
             opacity: 0;
             pointer-events: none;
-            display: none; /* კონვერტი სრულად ქრება */
+            display: none;
         }
 
         .center-content.open .card {
@@ -345,7 +345,7 @@
             100% { opacity: 0.5; }
         }
 
-        /* მობილური მოწყობილობების ადაპტაცია */
+        /* მობილური ადაპტაცია */
         @media (max-width: 880px) {
             body {
                 overflow-y: auto;
@@ -362,6 +362,9 @@
     </style>
 </head>
 <body>
+
+<!-- აუდიო ფაილი -->
+<audio id="weddingMusic" src="wedding-acid.mp3" preload="auto"></audio>
 
 <!-- მუდმივი ფონი (pic1.jpg) -->
 <div class="main-background"></div>
@@ -422,7 +425,7 @@
                 <a href="https://wa.me/?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90!%20%E1%83%A1%E1%83%98%E1%83%90%E1%83%9B%E1%83%90%E1%83%95%E1%83%9C%E1%83%94%E1%83%91%E1%83%98%E1%83%97%20%E1%83%93%E1%83%90%E1%83%95%E1%83%94%E1%83%A1%E1%83%AC%E1%83%A0%E1%83%94%E1%83%91%E1%83%98%20%E1%83%91%E1%83%90%E1%83%80%E1%83%9D%E1%83%A1%E1%83%90%20%E1%83%93%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98%E1%83%90%E1%83%A1%2020%20%E1%83%AC%E1%83%9A%E1%83%98%E1%83%A1%20%E1%83%98%E1%83%A3%E1%83%91%E1%83%98%E1%83%9A%E1%83%94%E1%83%A1%20%E1%83%A0%E1%83%90%E1%83%9A%E1%83%90%E1%83%A8%E1%83%98!%20%F0%9F%A5%82" class="btn btn-primary" target="_blank">
                     ✅ დავესწრები
                 </a>
-                <a href="https://maps.app.goo.gl/wmk44zNbbzcWyksW6" class="btn btn-secondary" target="_blank">
+                <a href="https://maps.google.com/?q=Khideshlebi+Guesthouse+Racha" class="btn btn-secondary" target="_blank">
                     📍 ლოკაციის ნახვა
                 </a>
             </div>
@@ -444,6 +447,12 @@
     let indexRight = Math.floor(images.length / 2);
 
     function openEnvelope() {
+        // მუსიკის ჩართვა დაჭერისთანავე
+        const audio = document.getElementById('weddingMusic');
+        if (audio) {
+            audio.play().catch(e => console.log("Audio playback error: ", e));
+        }
+
         document.getElementById('centerContent').classList.add('open');
         document.getElementById('mainContainer').classList.add('open');
         document.getElementById('hint').style.display = 'none';
@@ -471,7 +480,7 @@
             indexLeft = (indexLeft + 1) % images.length;
             indexRight = (indexRight + 1) % images.length;
             updateSlides();
-        }, 2500);
+        }, 3000); // 3 წამიანი ინტერვალი სურათების შესაცვლელად
     }
 
     function updateSlides() {
