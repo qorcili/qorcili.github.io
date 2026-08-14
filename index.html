@@ -534,7 +534,6 @@
                 min-height: auto;
             }
 
-            /* სლაიდერების სიმაღლე გაიზარდა 40%-ით (155px -> 217px) */
             .side-slideshow {
                 width: min(320px, 92vw);
                 height: 217px;
@@ -554,7 +553,18 @@
                 border-radius: 10px;
             }
 
-            /* თეთრი სივრცის მაქსიმალური შემცირება ბარათში */
+            /* ტექსტების პოზიციები მობილურის კონვერტზე */
+            .envelope-text-top {
+                top: 50px;
+                font-size: 16px;
+            }
+
+            /* ქვედა წარწერა "მოსაწვევი" ჩამოწეულია ბაფთის ქვემოთ */
+            .envelope-text-bottom {
+                bottom: 25px;
+                font-size: 15px;
+            }
+
             .card {
                 padding: 6px 12px;
                 border-radius: 10px;
@@ -621,13 +631,20 @@
                 gap: 4px;
             }
 
-            /* სლაიდერის სიმაღლე 40%-ით გაიზარდა (88px -> 123px) */
             .side-slideshow {
                 height: 123px;
             }
 
             .gatefold-envelope {
                 height: 385px;
+            }
+
+            .envelope-text-top {
+                top: 45px;
+            }
+
+            .envelope-text-bottom {
+                bottom: 20px;
             }
 
             .card {
