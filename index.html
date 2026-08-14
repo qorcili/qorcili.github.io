@@ -155,8 +155,6 @@
             border-left: none;
         }
 
-
-        /* ვიდეოს მსგავსი კონვერტის დაკეცილი სამკუთხა ნაკეცები */
         .door-left::after,
         .door-right::after {
             content: "";
@@ -194,8 +192,6 @@
             letter-spacing: 2px;
             pointer-events: none;
             transition: opacity 0.5s ease;
-            
-            /* ამოტვიფრული ოქროსფერი ეფექტი */
             color: #b89230;
             text-shadow: 1px 1px 1px #ffffff, -1px -1px 1px #8c6209, 0px 2px 3px rgba(0,0,0,0.15);
         }
@@ -213,7 +209,7 @@
             text-transform: uppercase;
         }
 
-        /* 🎀 ბაფთა — ვიდეოს მსგავსი რეალისტური გახსნის ეფექტი */
+        /* 🎀 ბაფთა */
         .ribbon-band {
             position: absolute;
             top: 50%;
@@ -268,7 +264,6 @@
             z-index: 12;
         }
 
-        /* მარცხენა/მარჯვენა მარყუჟები */
         .ribbon-bow::before,
         .ribbon-bow::after {
             content: "";
@@ -297,7 +292,6 @@
             transform: skewX(10deg) rotate(8deg);
         }
 
-        /* ბაფთის ჩამოშვებული ბოლოები */
         .ribbon-band .ribbon-tail-left,
         .ribbon-band .ribbon-tail-right {
             position: absolute;
@@ -339,44 +333,20 @@
             box-sizing: border-box;
         }
 
-        /* 🔓 გახსნის ანიმაცია — ჯერ ბაფთა იხსნება, შემდეგ კონვერტი */
+        /* 🔓 გახსნის ანიმაცია */
         @keyframes ribbonRelease {
-            0% {
-                opacity: 1;
-                transform: translateY(-50%) scaleX(1);
-            }
-            22% {
-                transform: translateY(-50%) scaleX(1.02);
-            }
-            48% {
-                transform: translateY(-43%) scaleX(.92);
-            }
-            72% {
-                transform: translateY(-10%) scaleX(.38);
-                opacity: .75;
-            }
-            100% {
-                transform: translateY(12%) scaleX(0);
-                opacity: 0;
-            }
+            0% { opacity: 1; transform: translateY(-50%) scaleX(1); }
+            22% { transform: translateY(-50%) scaleX(1.02); }
+            48% { transform: translateY(-43%) scaleX(.92); }
+            72% { transform: translateY(-10%) scaleX(.38); opacity: .75; }
+            100% { transform: translateY(12%) scaleX(0); opacity: 0; }
         }
 
         @keyframes bowRelease {
-            0% {
-                transform: scale(1) rotate(0deg);
-                opacity: 1;
-            }
-            35% {
-                transform: scale(1.08) rotate(-2deg);
-            }
-            62% {
-                transform: translateY(12px) scale(.88) rotate(3deg);
-                opacity: .75;
-            }
-            100% {
-                transform: translateY(42px) scale(.35) rotate(10deg);
-                opacity: 0;
-            }
+            0% { transform: scale(1) rotate(0deg); opacity: 1; }
+            35% { transform: scale(1.08) rotate(-2deg); }
+            62% { transform: translateY(12px) scale(.88) rotate(3deg); opacity: .75; }
+            100% { transform: translateY(42px) scale(.35) rotate(10deg); opacity: 0; }
         }
 
         @keyframes tailDropLeft {
@@ -410,7 +380,6 @@
 
         .center-content.open .door-left,
         .center-content.open .door-right {
-            /* ბაფთის გახსნის შემდეგ — ვიდეოს მსგავსად ნელა იშლება */
             transition:
                 transform 2.65s cubic-bezier(.18,.72,.18,1) 1.55s,
                 opacity .75s ease 3.65s;
@@ -550,26 +519,25 @@
             100% { opacity: 0.5; }
         }
 
-        /* მობილური ადაპტაცია */
+        /* 📱 მობილური ადაპტაცია */
         @media (max-width: 880px) {
             body {
                 overflow-y: auto;
-                padding: 8px 10px;
+                padding: 6px 8px;
                 align-items: flex-start;
             }
 
             .main-container {
                 flex-direction: column;
-                gap: 8px;
+                gap: 6px;
                 max-width: 100%;
                 min-height: auto;
             }
 
-            /* მობილურზე ზედა და ქვედა სლაიდების სიმაღლე შემცირებულია,
-               რათა გახსნილი ბარათი მთლიანად მოთავსდეს ეკრანზე */
+            /* სლაიდერების სიმაღლე გაიზარდა 40%-ით (155px -> 217px) */
             .side-slideshow {
                 width: min(320px, 92vw);
-                height: 155px;
+                height: 217px;
                 border-radius: 10px;
                 flex-shrink: 0;
                 box-shadow: 0 8px 20px rgba(0,0,0,0.45);
@@ -586,73 +554,76 @@
                 border-radius: 10px;
             }
 
-            /* გახსნილ ბარათში ზედა/ქვედა თეთრი სივრცე უფრო კომპაქტურია */
+            /* თეთრი სივრცის მაქსიმალური შემცირება ბარათში */
             .card {
-                padding: 14px 16px;
+                padding: 6px 12px;
                 border-radius: 10px;
+                justify-content: space-evenly;
             }
 
             .card h3 {
-                margin-bottom: 3px;
+                margin-bottom: 1px;
+                font-size: 10px;
             }
 
             .card h1 {
-                font-size: 19px;
-                margin-bottom: 6px;
+                font-size: 18px;
+                margin-bottom: 2px;
             }
 
             .names {
-                font-size: 15px;
-                margin-bottom: 8px;
+                font-size: 14px;
+                margin-bottom: 4px;
             }
 
             .text-body {
-                font-size: 11px;
-                line-height: 1.35;
-                margin-bottom: 9px;
+                font-size: 10.5px;
+                line-height: 1.25;
+                margin-bottom: 5px;
             }
 
             .details-box {
-                padding: 8px 10px;
-                margin-bottom: 9px;
+                padding: 5px 8px;
+                margin-bottom: 5px;
                 font-size: 10px;
             }
 
             .details-item {
-                margin-bottom: 5px;
+                margin-bottom: 3px;
             }
 
             .details-item span {
-                font-size: 13px;
-                margin-right: 6px;
+                font-size: 12px;
+                margin-right: 5px;
             }
 
             .btn-group {
-                gap: 6px;
+                gap: 4px;
             }
 
             .btn {
-                padding: 8px 13px;
+                padding: 6px 10px;
                 font-size: 10px;
             }
 
             .hint {
                 font-size: 11px;
-                margin-top: 5px;
+                margin-top: 3px;
             }
         }
 
         @media (max-width: 400px) {
             body {
-                padding: 5px 8px;
+                padding: 4px 6px;
             }
 
             .main-container {
-                gap: 6px;
+                gap: 4px;
             }
 
+            /* სლაიდერის სიმაღლე 40%-ით გაიზარდა (88px -> 123px) */
             .side-slideshow {
-                height: 88px;
+                height: 123px;
             }
 
             .gatefold-envelope {
@@ -660,19 +631,19 @@
             }
 
             .card {
-                padding: 11px 13px;
+                padding: 4px 8px;
             }
 
             .card h1 {
-                font-size: 18px;
+                font-size: 17px;
             }
 
             .text-body {
-                font-size: 10.5px;
+                font-size: 10px;
             }
 
             .details-box {
-                padding: 7px 8px;
+                padding: 4px 6px;
             }
         }
     </style>
@@ -739,7 +710,7 @@
                 </div>
 
                 <div class="btn-group">
-                    <a href="https://wa.me/?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90!%20%E1%83%A1%E1%83%98%E1%83%90%E1%83%9B%E1%83%90%E1%83%95%E1%83%9C%E1%83%94%E1%83%91%E1%83%98%E1%83%97%20%E1%83%93%E1%83%90%E1%83%95%E1%83%94%E1%83%A1%E1%83%AC%E1%83%A0%E1%83%94%E1%83%91%E1%83%98%20%E1%83%91%E1%83%90%E1%83%80%E1%83%9D%E1%83%A1%E1%83%90%20%E1%83%93%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98%E1%83%90%E1%83%A1%2020%20%E1%83%AC%E1%83%9A%E1%83%98%E1%83%A1%20%E1%83%98%E1%83%A3%E1%83%91%E1%83%98%E1%83%9A%E1%83%94%E1%83%A1%20%E1%83%A0%E1%83%90%E1%83%9A%E1%83%90%E1%83%A8%E1%83%98!%20%F0%9F%A5%82" class="btn btn-primary" target="_blank">
+                    <a href="https://wa.me/?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90!%20%E1%83%A1%E1%83%98%E1%83%90%E1%83%9B%E1%83%90%E1%83%95%E1%83%9C%E1%83%94%E1%83%91%E1%83%98%E1%83%97%20%E1%83%93%E1%83%90%E1%83%95%E1%83%94%E1%83%A1%E1%83%AC%E1%83%A0%E1%83%94%E1%83%91%E1%83%98%20%E1%83%91%E1%83%90%E1%83%80%E1%83%9D%E1%83%A1%E1%83%90%20%E1%83%93%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98%E1%83%A1%2020%20%E1%83%AC%E1%83%9A%E1%83%98%E1%83%A1%20%E1%83%98%E1%83%A3%E1%83%91%E1%83%98%E1%83%9A%E1%83%94%E1%83%A1%20%E1%83%A0%E1%83%90%E1%83%9A%E1%83%90%E1%83%A8%E1%83%98!%20%F0%9F%A5%82" class="btn btn-primary" target="_blank">
                         ✅ დავესწრები
                     </a>
                     <a href="https://maps.google.com/?q=Khideshlebi+Guesthouse+Racha" class="btn btn-secondary" target="_blank">
