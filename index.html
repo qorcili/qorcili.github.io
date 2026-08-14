@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ბაჩო & ნათია - 20 წელი ერთად!</title>
     
-    <!-- Open Graph / WhatsApp Preview -->
     <meta property="og:title" content="ბაჩო & ნათია - 20 წელი ერთად! ✨" />
     <meta property="og:description" content="სიყვარულით გეპატიჟებით რაჭაში! გახსენით მოსაწვევი." />
     <meta property="og:image" content="https://qorcili.github.io/pics/pic1.jpg" />
@@ -30,7 +29,7 @@
             color: #fff;
         }
 
-        /* 1. ძირითადი ფონი - pic1.jpg (მუდმივად რჩება) */
+        /* 1. ძირითადი ფონი - pic1.jpg */
         .main-background {
             position: fixed;
             top: 0;
@@ -53,7 +52,7 @@
             z-index: -1;
         }
 
-        /* მთავარი განლაგება */
+        /* მთავარი კონტეინერი */
         .main-container {
             display: flex;
             align-items: center;
@@ -65,7 +64,7 @@
             z-index: 1;
         }
 
-        /* მარცხენა და მარჯვენა სლაიდერის ბლოკები */
+        /* 🖼️ სლაიდერები */
         .side-slideshow {
             width: 240px;
             height: 340px;
@@ -79,6 +78,7 @@
             transform: scale(0.8);
             transition: all 0.8s ease 0.4s;
             pointer-events: none;
+            z-index: 10;
         }
 
         .side-slideshow img {
@@ -105,59 +105,106 @@
             width: 340px;
             flex-shrink: 0;
             position: relative;
-        }
-
-        /* ✉️ კონვერტი (ჩანს გახსნამდე) */
-        .envelope-container {
-            position: relative;
-            width: 320px;
-            height: 210px;
-            background-color: #1a1d24;
-            border-radius: 12px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            cursor: pointer;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            perspective: 1200px;
             z-index: 5;
         }
 
-        .envelope-container:hover {
-            transform: translateY(-5px);
+        /* ✉️ ორფრთიანი კონვერტი (Gatefold) */
+        .gatefold-envelope {
+            position: relative;
+            width: 340px;
+            height: 480px;
+            cursor: pointer;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+            border-radius: 12px;
+            perspective: 1000px;
         }
 
-        .envelope-internal {
+        /* მარცხენა ფრთა */
+        .door-left {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 50%;
             height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><g fill-rule="evenodd"><g fill="%23d4af37" fill-opacity="0.05"><path d="M50 40c13.255 0 24 10.745 24 24S63.255 88 50 88 26 77.255 26 64s10.745-24 24-24zm0 4c11.046 0 20 8.954 20 20s-8.954 20-20 20-20-8.954-20-20 8.954-20 20-20zm0 10c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10z"/></g></g></svg>');
-            z-index: 1;
-            opacity: 0.3;
+            background: #faf8f5;
+            border-radius: 12px 0 0 12px;
+            box-shadow: inset -2px 0 10px rgba(0,0,0,0.15);
+            transform-origin: left;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease 0.8s;
+            z-index: 3;
+            border: 1px solid #e2d9cc;
+            border-right: none;
         }
 
-        .flap {
+        /* მარჯვენა ფრთა */
+        .door-right {
             position: absolute;
-            top: -1px;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: #faf8f5;
+            border-radius: 0 12px 12px 0;
+            box-shadow: inset 2px 0 10px rgba(0,0,0,0.15);
+            transform-origin: right;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease 0.8s;
+            z-index: 3;
+            border: 1px solid #e2d9cc;
+            border-left: none;
+        }
+
+        /* ✍️ ამოტვიფრული ტექსტები თეთრ კონვერტზე */
+        .envelope-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            z-index: 4;
+            font-weight: 700;
+            letter-spacing: 2px;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            
+            /* ამოტვიფრული ოქროსფერი ეფექტი */
+            color: #b89230;
+            text-shadow: 1px 1px 1px #ffffff, -1px -1px 1px #8c6209, 0px 2px 3px rgba(0,0,0,0.15);
+        }
+
+        .envelope-text-top {
+            top: 80px;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        .envelope-text-bottom {
+            bottom: 80px;
+            font-size: 16px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* 🎀 ჰორიზონტალური ბაფთას ზოლი */
+        .ribbon-band {
+            position: absolute;
+            top: 50%;
             left: 0;
             width: 100%;
-            height: 110px;
-            background-color: #1a1d24;
-            clip-path: polygon(0 0, 100% 0, 50% 100%);
-            transform-origin: top;
-            transition: transform 0.5s ease;
-            z-index: 5;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            height: 40px;
+            background: linear-gradient(90deg, #d4af37, #f3e5ab, #d4af37);
+            transform: translateY(-50%);
+            z-index: 4;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: all 0.6s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .monogram-seal {
-            position: absolute;
-            top: 75px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 55px;
-            height: 55px;
-            background: radial-gradient(circle at 30% 30%, #f3e5ab, #d4af37, #aa7c11);
+        /* 🎀 ბაფთას კვანძი / მშვილდი ცენტრში */
+        .ribbon-bow {
+            width: 70px;
+            height: 70px;
+            background: radial-gradient(circle, #f3e5ab, #d4af37, #8c6209);
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -166,64 +213,71 @@
             font-family: 'Cinzel', serif;
             font-size: 22px;
             font-weight: 700;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.5);
-            z-index: 6;
-            border: 2px solid #8c6209;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+            border: 2px solid #fff;
+            position: relative;
         }
 
-        .pocket {
+        .ribbon-bow::before, .ribbon-bow::after {
+            content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 110px;
-            background-color: #16191e;
-            clip-path: polygon(0 100%, 100% 100%, 50% 0);
-            z-index: 4;
+            width: 35px;
+            height: 35px;
+            border: 3px solid #d4af37;
+            border-radius: 50% 50% 0 50%;
+            background: rgba(212, 175, 55, 0.3);
+            top: 15px;
+            z-index: -1;
+        }
+        .ribbon-bow::before {
+            left: -20px;
+            transform: rotate(-30deg);
+        }
+        .ribbon-bow::after {
+            right: -20px;
+            transform: rotate(120deg);
         }
 
-        /* ბარათი - ტექსტი */
+        /* ბარათი შიგნით */
         .card {
-            width: 340px;
-            background: rgba(255, 255, 255, 0.96);
-            border-radius: 16px;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 12px;
             padding: 25px 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
-            opacity: 0;
-            max-height: 0;
-            overflow: hidden;
-            pointer-events: none;
             border: 1px solid rgba(212, 175, 55, 0.5);
             color: #333;
-            display: none;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-sizing: border-box;
         }
 
-        /* გახსნის შემდეგ (Open State): კონვერტი ქრება, ბარათი ჩნდება */
-        .center-content.open .envelope-container {
+        /* 🔓 გახსნის ანიმაცია */
+        .center-content.open .door-left {
+            transform: rotateY(-160deg);
+            opacity: 0.1;
+        }
+
+        .center-content.open .door-right {
+            transform: rotateY(160deg);
+            opacity: 0.1;
+        }
+
+        .center-content.open .ribbon-band,
+        .center-content.open .envelope-text {
             opacity: 0;
             pointer-events: none;
-            display: none;
         }
 
-        .center-content.open .card {
-            display: block;
-            opacity: 1;
-            max-height: 1000px;
-            pointer-events: auto;
-            animation: fadeInCard 0.8s ease forwards;
+        .center-content.open .ribbon-band {
+            transform: translateY(-50%) scaleX(0);
         }
 
-        @keyframes fadeInCard {
-            from {
-                opacity: 0;
-                transform: translateY(20px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+        .center-content.open .gatefold-envelope {
+            box-shadow: none;
         }
 
         .main-container.open .side-slideshow {
@@ -231,10 +285,10 @@
             transform: scale(1);
         }
 
-        /* ტექსტის სტილები */
+        /* ტექსტები ბარათზე */
         .card h3 {
             color: #aa7c11;
-            font-size: 12px;
+            font-size: 11px;
             letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 6px;
@@ -243,15 +297,15 @@
         .card h1 {
             font-family: 'Cinzel', serif;
             color: #1a1d24;
-            font-size: 24px;
-            margin-bottom: 12px;
+            font-size: 22px;
+            margin-bottom: 10px;
         }
 
         .names {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             color: #1a1d24;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .names a {
@@ -261,26 +315,26 @@
         }
 
         .text-body {
-            font-size: 13px;
-            line-height: 1.6;
+            font-size: 12px;
+            line-height: 1.5;
             color: #4a5568;
-            margin-bottom: 18px;
+            margin-bottom: 14px;
         }
 
         .details-box {
             background: #f7fafc;
             border-radius: 10px;
-            padding: 14px;
+            padding: 12px;
             text-align: left;
-            margin-bottom: 18px;
-            font-size: 12px;
+            margin-bottom: 14px;
+            font-size: 11px;
             border: 1px solid #edf2f7;
         }
 
         .details-item {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: #2d3748;
         }
 
@@ -289,23 +343,23 @@
         }
 
         .details-item span {
-            font-size: 17px;
-            margin-right: 10px;
+            font-size: 15px;
+            margin-right: 8px;
         }
 
         .btn-group {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
         .btn {
             display: inline-block;
-            padding: 12px 20px;
+            padding: 10px 16px;
             border-radius: 25px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 12px;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -317,19 +371,9 @@
             box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
         }
 
-        .btn-primary:hover {
-            background: #1da851;
-            transform: translateY(-2px);
-        }
-
         .btn-secondary {
             background: #e2e8f0;
             color: #1a1d24;
-        }
-
-        .btn-secondary:hover {
-            background: #cbd5e1;
-            transform: translateY(-2px);
         }
 
         .hint {
@@ -356,83 +400,88 @@
             }
             .side-slideshow {
                 width: 320px;
-                height: 200px;
+                height: 180px;
+            }
+            .gatefold-envelope {
+                width: 320px;
+                height: 460px;
             }
         }
     </style>
 </head>
 <body>
 
-<!-- აუდიო ფაილი -->
 <audio id="weddingMusic" src="wedding-acid.mp3" preload="auto"></audio>
 
-<!-- მუდმივი ფონი (pic1.jpg) -->
 <div class="main-background"></div>
 <div class="bg-overlay"></div>
 
 <div class="main-container" id="mainContainer">
     
-    <!-- მარცხენა სლაიდერი -->
     <div class="side-slideshow" id="slideshowLeft"></div>
 
-    <!-- ცენტრალური ზონა (კონვერტი / ბარათი) -->
     <div class="center-content" id="centerContent">
-        <div class="envelope-container" onclick="openEnvelope()">
-            <div class="envelope-internal"></div>
-            <div class="flap"></div>
-            <div class="monogram-seal">20</div>
-            <div class="pocket"></div>
+        
+        <div class="gatefold-envelope" onclick="openEnvelope()">
+            <div class="door-left"></div>
+            <div class="door-right"></div>
+            
+            <div class="envelope-text envelope-text-top">ბაჩო  &  ნათია</div>
+            <div class="envelope-text envelope-text-bottom">მოსაწვევი</div>
+
+            <div class="ribbon-band">
+                <div class="ribbon-bow">20</div>
+            </div>
+
+            <div class="card" id="card">
+                <h3>Save the Date</h3>
+                <h1>20 წელი ერთად</h1>
+                
+                <div class="names">
+                    <a href="https://www.instagram.com/bachogurgenize/" target="_blank">ბაჩო</a> & 
+                    <a href="https://www.instagram.com/natia.babukhadia/" target="_blank">ნათია</a>
+                </div>
+
+                <p class="text-body">
+                    სიყვარულით გეპატიჟებით რაჭაში, ჩვენი 20 წლის იუბილის აღსანიშნავად! გვინდა ეს განსაკუთრებული დღე გავატაროთ საუკეთესო მეგობრების გარემოცვაში.
+                </p>
+
+                <div class="details-box">
+                    <div class="details-item">
+                        <span>📅</span>
+                        <div>
+                            <strong>12 - 13 სექტემბერი</strong><br>
+                            <small style="color: #718096;">(შაბათი 12:00 - კვირა 12:00)</small>
+                        </div>
+                    </div>
+                    <div class="details-item">
+                        <span>📍</span>
+                        <div>
+                            <strong><a href="https://www.instagram.com/khideshlebiguesthouse" target="_blank" style="color: #aa7c11; text-decoration: none; font-weight: 600;">Khideshlebi Guesthouse</a></strong>, რაჭა
+                        </div>
+                    </div>
+                    <div class="details-item">
+                        <span>🍷</span>
+                        <div>
+                            <strong>რაჭული სიმყუდროვე & 1 ღამე</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <a href="https://wa.me/?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90!%20%E1%83%A1%E1%83%98%E1%83%90%E1%83%9B%E1%83%90%E1%83%95%E1%83%9C%E1%83%94%E1%83%91%E1%83%98%E1%83%97%20%E1%83%93%E1%83%90%E1%83%95%E1%83%94%E1%83%A1%E1%83%AC%E1%83%A0%E1%83%94%E1%83%91%E1%83%98%20%E1%83%91%E1%83%90%E1%83%80%E1%83%9D%E1%83%A1%E1%83%90%20%E1%83%93%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98%E1%83%90%E1%83%A1%2020%20%E1%83%AC%E1%83%9A%E1%83%98%E1%83%A1%20%E1%83%98%E1%83%A3%E1%83%91%E1%83%98%E1%83%9A%E1%83%94%E1%83%A1%20%E1%83%A0%E1%83%90%E1%83%9A%E1%83%90%E1%83%A8%E1%83%98!%20%F0%9F%A5%82" class="btn btn-primary" target="_blank">
+                        ✅ დავესწრები
+                    </a>
+                    <a href="https://maps.google.com/?q=Khideshlebi+Guesthouse+Racha" class="btn btn-secondary" target="_blank">
+                        📍 ლოკაციის ნახვა
+                    </a>
+                </div>
+            </div>
         </div>
 
         <div class="hint" id="hint">გახსენით მოსაწვევი ✨</div>
-
-        <div class="card" id="card">
-            <h3>Save the Date</h3>
-            <h1>20 წელი ერთად</h1>
-            
-            <div class="names">
-                <a href="https://www.instagram.com/bachogurgenize/" target="_blank">ბაჩო</a> & 
-                <a href="https://www.instagram.com/natia.babukhadia/" target="_blank">ნათია</a>
-            </div>
-
-            <p class="text-body">
-                სიყვარულით გეპატიჟებით რაჭაში, ჩვენი 20 წლის იუბილის აღსანიშნავად! გვინდა ეს განსაკუთრებული დღე გავატაროთ საუკეთესო მეგობრების გარემოცვაში.
-            </p>
-
-            <div class="details-box">
-                <div class="details-item">
-                    <span>📅</span>
-                    <div>
-                        <strong>12 - 13 სექტემბერი</strong><br>
-                        <small style="color: #718096;">(შაბათი 12:00 - კვირა 12:00)</small>
-                    </div>
-                </div>
-                <div class="details-item">
-                    <span>📍</span>
-                    <div>
-                        <strong><a href="https://www.instagram.com/khideshlebiguesthouse" target="_blank" style="color: #aa7c11; text-decoration: none; font-weight: 600;">Khideshlebi Guesthouse</a></strong>, რაჭა
-                    </div>
-                </div>
-                <div class="details-item">
-                    <span>🍷</span>
-                    <div>
-                        <strong>რაჭული სიმყუდროვე & 1 ღამე</strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="btn-group">
-                <a href="https://wa.me/?text=%E1%83%92%E1%83%90%E1%83%9B%E1%83%90%E1%83%A0%E1%83%AF%E1%83%9D%E1%83%91%E1%83%90!%20%E1%83%A1%E1%83%98%E1%83%90%E1%83%9B%E1%83%90%E1%83%95%E1%83%9C%E1%83%94%E1%83%91%E1%83%98%E1%83%97%20%E1%83%93%E1%83%90%E1%83%95%E1%83%94%E1%83%A1%E1%83%AC%E1%83%A0%E1%83%94%E1%83%91%E1%83%98%20%E1%83%91%E1%83%90%E1%83%80%E1%83%9D%E1%83%A1%E1%83%90%20%E1%83%93%E1%83%90%E1%83%9C%E1%83%90%E1%83%97%E1%83%98%E1%83%90%E1%83%A1%2020%20%E1%83%AC%E1%83%9A%E1%83%98%E1%83%A1%20%E1%83%98%E1%83%A3%E1%83%91%E1%83%98%E1%83%9A%E1%83%94%E1%83%A1%20%E1%83%A0%E1%83%90%E1%83%9A%E1%83%90%E1%83%A8%E1%83%98!%20%F0%9F%A5%82" class="btn btn-primary" target="_blank">
-                    ✅ დავესწრები
-                </a>
-                <a href="https://maps.google.com/?q=Khideshlebi+Guesthouse+Racha" class="btn btn-secondary" target="_blank">
-                    📍 ლოკაციის ნახვა
-                </a>
-            </div>
-        </div>
     </div>
 
-    <!-- მარჯვენა სლაიდერი -->
     <div class="side-slideshow" id="slideshowRight"></div>
 
 </div>
@@ -447,10 +496,9 @@
     let indexRight = Math.floor(images.length / 2);
 
     function openEnvelope() {
-        // მუსიკის ჩართვა დაჭერისთანავე
         const audio = document.getElementById('weddingMusic');
         if (audio) {
-            audio.play().catch(e => console.log("Audio playback error: ", e));
+            audio.play().catch(e => console.log("Audio play error: ", e));
         }
 
         document.getElementById('centerContent').classList.add('open');
@@ -480,7 +528,7 @@
             indexLeft = (indexLeft + 1) % images.length;
             indexRight = (indexRight + 1) % images.length;
             updateSlides();
-        }, 3000); // 3 წამიანი ინტერვალი სურათების შესაცვლელად
+        }, 3000);
     }
 
     function updateSlides() {
