@@ -109,7 +109,7 @@
             z-index: 5;
         }
 
-        /* ✉️ ორფრთიანი კონვერტი (Gatefold) - 70% გამჭვირვალობა გახსნამდე */
+        /* ✉️ ორფრთიანი კონვერტი (Gatefold) */
         .gatefold-envelope {
             position: relative;
             width: 340px;
@@ -119,12 +119,12 @@
             border-radius: 12px;
             perspective: 1400px;
             transform-style: preserve-3d;
-            opacity: 0.5; /* 👈 70% გამჭვირვალობა */
+            opacity: 0.5;
             transition: opacity 0.5s ease, box-shadow 0.5s ease;
         }
 
         .gatefold-envelope:hover {
-            opacity: 0.85; /* ჰოვერზე ოდნავ უფრო მკვეთრი რომ გახდეს */
+            opacity: 0.85;
         }
 
         /* მარცხენა ფრთა */
@@ -134,7 +134,7 @@
             left: 0;
             width: 50%;
             height: 100%;
-            background: rgba(250, 248, 245, 0.88); /* 👈 ოდნავ გამჭვირვალე ფონი ქაღალდისთვის */
+            background: rgba(250, 248, 245, 0.88);
             backdrop-filter: blur(3px);
             border-radius: 12px 0 0 12px;
             box-shadow: inset -2px 0 10px rgba(0,0,0,0.15);
@@ -152,7 +152,7 @@
             right: 0;
             width: 50%;
             height: 100%;
-            background: rgba(250, 248, 245, 0.88); /* 👈 ოდნავ გამჭვირვალე ფონი ქაღალდისთვის */
+            background: rgba(250, 248, 245, 0.88);
             backdrop-filter: blur(3px);
             border-radius: 0 12px 12px 0;
             box-shadow: inset 2px 0 10px rgba(0,0,0,0.15);
@@ -205,19 +205,19 @@
         }
 
         .envelope-text-top {
-            top: 80px;
+            top: 70px;
             font-size: 24px;
             text-transform: uppercase;
         }
 
         .envelope-text-bottom {
-            bottom: 80px;
+            bottom: 70px;
             font-size: 24px;
             letter-spacing: 4px;
             text-transform: uppercase;
         }
 
-        /* 🦋 3D პეპლის სტილის აბრეშუმის ბაფთა ოქროს კანტებით */
+        /* 🦋 ჰორიზონტალური ზოლი */
         .ribbon-band {
             position: absolute;
             top: 50%;
@@ -247,12 +247,12 @@
             z-index: 12;
         }
 
-        /* 🦋 პეპლის გაშლილი ფრთები */
+        /* 🦋 ქვედა ფრთები (არსებული) */
         .ribbon-bow::before,
         .ribbon-bow::after {
             content: "";
             position: absolute;
-            top: -24px;
+            top: 0px;
             width: 95px;
             height: 75px;
             border: 2px solid #d4af37;
@@ -261,21 +261,48 @@
             z-index: -1;
         }
 
-        /* მარცხენა ფრთა */
+        /* მარცხენა ქვედა ფრთა */
         .ribbon-bow::before {
             left: -88px;
             border-radius: 80% 20% 35% 70% / 70% 30% 60% 40%;
             transform: rotate(-12deg) skewY(-4deg);
         }
 
-        /* მარჯვენა ფრთა */
+        /* მარჯვენა ქვედა ფრთა */
         .ribbon-bow::after {
             right: -88px;
             border-radius: 20% 80% 70% 35% / 30% 70% 40% 60%;
             transform: rotate(12deg) skewY(4deg);
         }
 
-        /* ჩამოშლილი ლენტები (პეპლის ქვედა ფრთების ეფექტით) */
+        /* 🦋 ზედა ფრთები (სარკისებურად გადამრავლებული და ჩამოწეული შუა ღერძზე) */
+        .ribbon-bow-top-left,
+        .ribbon-bow-top-right {
+            position: absolute;
+            bottom: 0px;
+            width: 95px;
+            height: 75px;
+            border: 2px solid #d4af37;
+            background: linear-gradient(145deg, #ffffff 0%, #f7f3ea 35%, #d1c7b5 75%, #ebd287 100%);
+            box-shadow: 0 -12px 22px rgba(0,0,0,0.28), inset 4px -4px 10px rgba(255,255,255,0.95);
+            z-index: -1;
+        }
+
+        /* მარცხენა ზედა ფრთა (სარკისებური Flip Y) */
+        .ribbon-bow-top-left {
+            left: -88px;
+            border-radius: 80% 20% 35% 70% / 70% 30% 60% 40%;
+            transform: scaleY(-1) rotate(-12deg) skewY(-4deg);
+        }
+
+        /* მარჯვენა ზედა ფრთა (სარკისებური Flip Y) */
+        .ribbon-bow-top-right {
+            right: -88px;
+            border-radius: 20% 80% 70% 35% / 30% 70% 40% 60%;
+            transform: scaleY(-1) rotate(12deg) skewY(4deg);
+        }
+
+        /* ჩამოშლილი ლენტები */
         .ribbon-band .ribbon-tail-left,
         .ribbon-band .ribbon-tail-right {
             position: absolute;
@@ -393,7 +420,7 @@
         }
 
         .center-content.open .gatefold-envelope {
-            opacity: 1; /* 👈 გახსნის შემდეგ სრული ხილვადობა */
+            opacity: 1;
             box-shadow: 0 20px 50px rgba(0,0,0,0.38);
         }
 
@@ -541,8 +568,8 @@
             }
 
             .envelope-text-top {
-                top: 50px;
-                font-size: 28px;
+                top: 45px;
+                font-size: 24px;
             }
 
             .envelope-text-bottom {
@@ -625,7 +652,7 @@
             }
 
             .envelope-text-top {
-                top: 45px;
+                top: 40px;
             }
 
             .envelope-text-bottom {
@@ -673,7 +700,10 @@
             <div class="ribbon-band">
                 <div class="ribbon-tail-left"></div>
                 <div class="ribbon-tail-right"></div>
-                <div class="ribbon-bow"></div>
+                <div class="ribbon-bow">
+                    <div class="ribbon-bow-top-left"></div>
+                    <div class="ribbon-bow-top-right"></div>
+                </div>
             </div>
 
             <div class="card" id="card">
