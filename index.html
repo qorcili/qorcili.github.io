@@ -76,7 +76,7 @@
             position: relative;
             opacity: 0;
             transform: scale(0.8);
-            transition: all 0.8s ease 0.4s;
+            transition: all 0.9s ease 3.75s;
             pointer-events: none;
             z-index: 10;
         }
@@ -117,7 +117,8 @@
             cursor: pointer;
             box-shadow: 0 20px 50px rgba(0,0,0,0.7);
             border-radius: 12px;
-            perspective: 1000px;
+            perspective: 1400px;
+            transform-style: preserve-3d;
         }
 
         /* მარცხენა ფრთა */
@@ -154,6 +155,35 @@
             border-left: none;
         }
 
+
+        /* ვიდეოს მსგავსი კონვერტის დაკეცილი სამკუთხა ნაკეცები */
+        .door-left::after,
+        .door-right::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: .9;
+        }
+
+        .door-left::after {
+            left: 0;
+            background:
+                linear-gradient(135deg, transparent 49.4%, rgba(177,158,132,.38) 50%, transparent 50.7%),
+                linear-gradient(45deg, transparent 49.4%, rgba(177,158,132,.28) 50%, transparent 50.7%);
+            clip-path: polygon(0 0, 100% 50%, 0 100%);
+        }
+
+        .door-right::after {
+            right: 0;
+            background:
+                linear-gradient(225deg, transparent 49.4%, rgba(177,158,132,.38) 50%, transparent 50.7%),
+                linear-gradient(135deg, transparent 49.4%, rgba(177,158,132,.28) 50%, transparent 50.7%);
+            clip-path: polygon(0 50%, 100% 0, 100% 100%);
+        }
+
         /* ✍️ ამოტვიფრული ტექსტები თეთრ კონვერტზე */
         .envelope-text {
             position: absolute;
@@ -183,59 +213,113 @@
             text-transform: uppercase;
         }
 
-        /* 🎀 ჰორიზონტალური ბაფთას ზოლი */
+        /* 🎀 ბაფთა — ვიდეოს მსგავსი რეალისტური გახსნის ეფექტი */
         .ribbon-band {
             position: absolute;
             top: 50%;
             left: 0;
             width: 100%;
-            height: 40px;
-            background: linear-gradient(90deg, #d4af37, #f3e5ab, #d4af37);
+            height: 42px;
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #f3f1f0 24%,
+                    #c9c4c4 50%,
+                    #f8f7f6 78%,
+                    #d7d3d2 100%
+                );
             transform: translateY(-50%);
-            z-index: 4;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            transition: all 0.6s ease;
+            z-index: 7;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.22);
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: opacity .35s ease 1.25s;
         }
 
-        /* 🎀 ბაფთას კვანძი / მშვილდი ცენტრში */
-        .ribbon-bow {
-            width: 70px;
-            height: 70px;
-            background: radial-gradient(circle, #f3e5ab, #d4af37, #8c6209);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #1a1d24;
-            font-family: 'Cinzel', serif;
-            font-size: 22px;
-            font-weight: 700;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-            border: 2px solid #fff;
-            position: relative;
-        }
-
-        .ribbon-bow::before, .ribbon-bow::after {
-            content: '';
+        .ribbon-band::before,
+        .ribbon-band::after {
+            content: "";
             position: absolute;
-            width: 35px;
-            height: 35px;
-            border: 3px solid #d4af37;
-            border-radius: 50% 50% 0 50%;
-            background: rgba(212, 175, 55, 0.3);
-            top: 15px;
+            top: 0;
+            width: 7px;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,.10), rgba(255,255,255,.45), rgba(0,0,0,.08));
+            opacity: .65;
+        }
+
+        .ribbon-band::before { left: 18%; }
+        .ribbon-band::after  { right: 18%; }
+
+        .ribbon-bow {
+            position: relative;
+            width: 34px;
+            height: 28px;
+            border-radius: 7px;
+            background: linear-gradient(135deg, #fff, #bdb8b8 48%, #f8f7f6);
+            border: 1px solid rgba(125,120,120,.45);
+            box-shadow:
+                0 4px 9px rgba(0,0,0,.25),
+                inset 2px 2px 4px rgba(255,255,255,.9),
+                inset -2px -2px 4px rgba(0,0,0,.12);
+            color: transparent;
+            font-size: 0;
+            z-index: 12;
+        }
+
+        /* მარცხენა/მარჯვენა მარყუჟები */
+        .ribbon-bow::before,
+        .ribbon-bow::after {
+            content: "";
+            position: absolute;
+            top: -14px;
+            width: 82px;
+            height: 55px;
+            border: 2px solid rgba(160,155,155,.55);
+            background:
+                linear-gradient(145deg, #ffffff 0%, #e7e3e3 42%, #aaa5a5 72%, #f7f6f5 100%);
+            box-shadow:
+                0 5px 10px rgba(0,0,0,.22),
+                inset 3px 3px 7px rgba(255,255,255,.8);
             z-index: -1;
         }
+
         .ribbon-bow::before {
-            left: -20px;
-            transform: rotate(-30deg);
+            left: -75px;
+            border-radius: 55% 12% 12% 55%;
+            transform: skewX(-10deg) rotate(-8deg);
         }
+
         .ribbon-bow::after {
-            right: -20px;
-            transform: rotate(120deg);
+            right: -75px;
+            border-radius: 12% 55% 55% 12%;
+            transform: skewX(10deg) rotate(8deg);
+        }
+
+        /* ბაფთის ჩამოშვებული ბოლოები */
+        .ribbon-band .ribbon-tail-left,
+        .ribbon-band .ribbon-tail-right {
+            position: absolute;
+            top: 24px;
+            width: 72px;
+            height: 125px;
+            background: linear-gradient(90deg, #aaa5a5, #f9f8f7 45%, #c0bbbb);
+            filter: drop-shadow(0 4px 5px rgba(0,0,0,.18));
+            z-index: -2;
+            transform-origin: top center;
+        }
+
+        .ribbon-band .ribbon-tail-left {
+            left: calc(50% - 62px);
+            clip-path: polygon(0 0, 100% 0, 82% 78%, 54% 100%, 40% 78%, 0 88%);
+            transform: rotate(7deg);
+        }
+
+        .ribbon-band .ribbon-tail-right {
+            right: calc(50% - 62px);
+            clip-path: polygon(0 0, 100% 0, 100% 88%, 60% 78%, 46% 100%, 18% 78%);
+            transform: rotate(-7deg);
         }
 
         /* ბარათი შიგნით */
@@ -255,29 +339,106 @@
             box-sizing: border-box;
         }
 
-        /* 🔓 გახსნის ანიმაცია */
+        /* 🔓 გახსნის ანიმაცია — ჯერ ბაფთა იხსნება, შემდეგ კონვერტი */
+        @keyframes ribbonRelease {
+            0% {
+                opacity: 1;
+                transform: translateY(-50%) scaleX(1);
+            }
+            22% {
+                transform: translateY(-50%) scaleX(1.02);
+            }
+            48% {
+                transform: translateY(-43%) scaleX(.92);
+            }
+            72% {
+                transform: translateY(-10%) scaleX(.38);
+                opacity: .75;
+            }
+            100% {
+                transform: translateY(12%) scaleX(0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes bowRelease {
+            0% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            35% {
+                transform: scale(1.08) rotate(-2deg);
+            }
+            62% {
+                transform: translateY(12px) scale(.88) rotate(3deg);
+                opacity: .75;
+            }
+            100% {
+                transform: translateY(42px) scale(.35) rotate(10deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes tailDropLeft {
+            0% { transform: rotate(7deg) translateY(0); opacity: 1; }
+            55% { transform: rotate(13deg) translateY(20px); opacity: .9; }
+            100% { transform: rotate(20deg) translateY(95px); opacity: 0; }
+        }
+
+        @keyframes tailDropRight {
+            0% { transform: rotate(-7deg) translateY(0); opacity: 1; }
+            55% { transform: rotate(-13deg) translateY(20px); opacity: .9; }
+            100% { transform: rotate(-20deg) translateY(95px); opacity: 0; }
+        }
+
+        .center-content.open .ribbon-band {
+            animation: ribbonRelease 2.35s cubic-bezier(.22,.61,.36,1) forwards;
+            transition: none;
+        }
+
+        .center-content.open .ribbon-bow {
+            animation: bowRelease 2.15s cubic-bezier(.22,.61,.36,1) forwards;
+        }
+
+        .center-content.open .ribbon-tail-left {
+            animation: tailDropLeft 2.1s ease-out forwards;
+        }
+
+        .center-content.open .ribbon-tail-right {
+            animation: tailDropRight 2.1s ease-out forwards;
+        }
+
+        .center-content.open .door-left,
+        .center-content.open .door-right {
+            /* ბაფთის გახსნის შემდეგ — ვიდეოს მსგავსად ნელა იშლება */
+            transition:
+                transform 2.65s cubic-bezier(.18,.72,.18,1) 1.55s,
+                opacity .75s ease 3.65s;
+            backface-visibility: hidden;
+        }
+
         .center-content.open .door-left {
-            transform: rotateY(-160deg);
-            opacity: 0.1;
+            transform: rotateY(-168deg) translateZ(8px);
+            opacity: .12;
         }
 
         .center-content.open .door-right {
-            transform: rotateY(160deg);
-            opacity: 0.1;
+            transform: rotateY(168deg) translateZ(8px);
+            opacity: .12;
         }
 
         .center-content.open .ribbon-band,
         .center-content.open .envelope-text {
-            opacity: 0;
             pointer-events: none;
         }
 
-        .center-content.open .ribbon-band {
-            transform: translateY(-50%) scaleX(0);
+        .center-content.open .envelope-text {
+            opacity: 0;
+            transition: opacity .45s ease .65s;
         }
 
         .center-content.open .gatefold-envelope {
-            box-shadow: none;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.38);
         }
 
         .main-container.open .side-slideshow {
@@ -430,7 +591,9 @@
             <div class="envelope-text envelope-text-bottom">მოსაწვევი</div>
 
             <div class="ribbon-band">
-                <div class="ribbon-bow">20</div>
+                <div class="ribbon-tail-left"></div>
+                <div class="ribbon-tail-right"></div>
+                <div class="ribbon-bow"></div>
             </div>
 
             <div class="card" id="card">
@@ -495,7 +658,12 @@
     let indexLeft = 0;
     let indexRight = Math.floor(images.length / 2);
 
+    let envelopeOpened = false;
+
     function openEnvelope() {
+        if (envelopeOpened) return;
+        envelopeOpened = true;
+
         const audio = document.getElementById('weddingMusic');
         if (audio) {
             audio.play().catch(e => console.log("Audio play error: ", e));
