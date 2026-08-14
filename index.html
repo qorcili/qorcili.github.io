@@ -209,81 +209,90 @@
             text-transform: uppercase;
         }
 
-/* 🎀 ბაფთა ვარიანტი 3: 3D მოცულობითი აბრეშუმი */
-.ribbon-band {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 42px;
-    background: linear-gradient(180deg, #ffffff 0%, #ebd287 12%, #fdfbf7 50%, #d8caa2 88%, #c5a028 100%);
-    transform: translateY(-50%);
-    z-index: 7;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.22);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        /* 🦋 3D პეპლის სტილის აბრეშუმის ბაფთა ოქროს კანტებით */
+        .ribbon-band {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 42px;
+            background: linear-gradient(180deg, #ffffff 0%, #ebd287 12%, #fdfbf7 50%, #d8caa2 88%, #c5a028 100%);
+            transform: translateY(-50%);
+            z-index: 7;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.22);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top: 1.5px solid #d4af37;
+            border-bottom: 1.5px solid #d4af37;
+        }
 
-.ribbon-bow {
-    position: relative;
-    width: 36px;
-    height: 30px;
-    border-radius: 8px;
-    background: radial-gradient(circle, #ffffff 20%, #d4af37 100%);
-    border: 1px solid #b89230;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-    z-index: 12;
-}
+        /* ბაფთის ცენტრალური კვანძი */
+        .ribbon-bow {
+            position: relative;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ffffff 20%, #d4af37 80%, #996f0d 100%);
+            border: 1.5px solid #d4af37;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.35);
+            z-index: 12;
+        }
 
-.ribbon-bow::before,
-.ribbon-bow::after {
-    content: "";
-    position: absolute;
-    top: -18px;
-    width: 85px;
-    height: 60px;
-    border: 2px solid #d4af37;
-    background: linear-gradient(145deg, #ffffff 0%, #f4f0e8 40%, #c4baa7 80%, #ebd287 100%);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.25), inset 3px 3px 8px rgba(255,255,255,0.95);
-    z-index: -1;
-}
+        /* 🦋 პეპლის გაშლილი ფრთები */
+        .ribbon-bow::before,
+        .ribbon-bow::after {
+            content: "";
+            position: absolute;
+            top: -24px;
+            width: 95px;
+            height: 75px;
+            border: 2px solid #d4af37;
+            background: linear-gradient(145deg, #ffffff 0%, #f7f3ea 35%, #d1c7b5 75%, #ebd287 100%);
+            box-shadow: 0 12px 22px rgba(0,0,0,0.28), inset 4px 4px 10px rgba(255,255,255,0.95);
+            z-index: -1;
+        }
 
-.ribbon-bow::before {
-    left: -78px;
-    border-radius: 65% 10% 20% 50%;
-    transform: rotate(-7deg);
-}
+        /* მარცხენა ფრთა */
+        .ribbon-bow::before {
+            left: -88px;
+            border-radius: 80% 20% 35% 70% / 70% 30% 60% 40%;
+            transform: rotate(-12deg) skewY(-4deg);
+        }
 
-.ribbon-bow::after {
-    right: -78px;
-    border-radius: 10% 65% 50% 20%;
-    transform: rotate(7deg);
-}
+        /* მარჯვენა ფრთა */
+        .ribbon-bow::after {
+            right: -88px;
+            border-radius: 20% 80% 70% 35% / 30% 70% 40% 60%;
+            transform: rotate(12deg) skewY(4deg);
+        }
 
-.ribbon-band .ribbon-tail-left,
-.ribbon-band .ribbon-tail-right {
-    position: absolute;
-    top: 22px;
-    width: 68px;
-    height: 125px;
-    background: linear-gradient(90deg, #c5a028 0%, #ffffff 20%, #f0ebd9 50%, #bebaa8 80%, #c5a028 100%);
-    filter: drop-shadow(0 8px 10px rgba(0,0,0,0.25));
-    z-index: -2;
-    transform-origin: top center;
-}
+        /* ჩამოშლილი ლენტები (პეპლის ქვედა ფრთების ეფექტით) */
+        .ribbon-band .ribbon-tail-left,
+        .ribbon-band .ribbon-tail-right {
+            position: absolute;
+            top: 22px;
+            width: 72px;
+            height: 130px;
+            background: linear-gradient(90deg, #c5a028 0%, #ffffff 20%, #f0ebd9 50%, #bebaa8 80%, #c5a028 100%);
+            filter: drop-shadow(0 8px 10px rgba(0,0,0,0.25));
+            z-index: -2;
+            transform-origin: top center;
+            border-left: 1px solid #d4af37;
+            border-right: 1px solid #d4af37;
+        }
 
-.ribbon-band .ribbon-tail-left {
-    left: calc(50% - 60px);
-    clip-path: polygon(0 0, 100% 0, 80% 85%, 45% 100%, 30% 85%, 0 92%);
-    transform: rotate(8deg);
-}
+        .ribbon-band .ribbon-tail-left {
+            left: calc(50% - 64px);
+            clip-path: polygon(0 0, 100% 0, 85% 82%, 50% 100%, 25% 82%, 0 92%);
+            transform: rotate(14deg);
+        }
 
-.ribbon-band .ribbon-tail-right {
-    right: calc(50% - 60px);
-    clip-path: polygon(0 0, 100% 0, 100% 92%, 70% 85%, 55% 100%, 20% 85%);
-    transform: rotate(-8deg);
-}
+        .ribbon-band .ribbon-tail-right {
+            right: calc(50% - 64px);
+            clip-path: polygon(0 0, 100% 0, 100% 92%, 75% 82%, 50% 100%, 15% 82%);
+            transform: rotate(-14deg);
+        }
 
         /* ბარათი შიგნით */
         .card {
@@ -319,15 +328,15 @@
         }
 
         @keyframes tailDropLeft {
-            0% { transform: rotate(7deg) translateY(0); opacity: 1; }
-            55% { transform: rotate(13deg) translateY(20px); opacity: .9; }
-            100% { transform: rotate(20deg) translateY(95px); opacity: 0; }
+            0% { transform: rotate(14deg) translateY(0); opacity: 1; }
+            55% { transform: rotate(18deg) translateY(20px); opacity: .9; }
+            100% { transform: rotate(24deg) translateY(95px); opacity: 0; }
         }
 
         @keyframes tailDropRight {
-            0% { transform: rotate(-7deg) translateY(0); opacity: 1; }
-            55% { transform: rotate(-13deg) translateY(20px); opacity: .9; }
-            100% { transform: rotate(-20deg) translateY(95px); opacity: 0; }
+            0% { transform: rotate(-14deg) translateY(0); opacity: 1; }
+            55% { transform: rotate(-18deg) translateY(20px); opacity: .9; }
+            100% { transform: rotate(-24deg) translateY(95px); opacity: 0; }
         }
 
         .center-content.open .ribbon-band {
@@ -522,13 +531,11 @@
                 border-radius: 10px;
             }
 
-            /* ტექსტების პოზიციები მობილურის კონვერტზე */
             .envelope-text-top {
                 top: 50px;
                 font-size: 16px;
             }
 
-            /* ქვედა წარწერა "მოსაწვევი" ჩამოწეულია ბაფთის ქვემოთ */
             .envelope-text-bottom {
                 bottom: 25px;
                 font-size: 15px;
